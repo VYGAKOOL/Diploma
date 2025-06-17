@@ -1,0 +1,66 @@
+/* src/style.css */
+
+/* 1) Загальні налаштування для тіла сторінки */
+body {
+    background-color: #f8f9fa; /* світло-сіре тло, як у Bootstrap */
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* 2) Клас для головного контейнера сторінок */
+.container {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+/* 3) Стиль для тайтлів */
+h1, h2, h3, h4, h5, h6 {
+    color: #343a40; /* темно-сірий */
+}
+
+/* 4) Окрема стилізація для зображення на Home */
+.welcome-img {
+    max-width: 800px;    /* не більше 800px у ширину */
+    width: 100%;         /* адаптивно під ширину контейнера */
+    height: auto;        /* зберігає пропорції */
+    border-radius: 8px;  /* легке обтинання кутів */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* тінь навколо */
+    margin-bottom: 20px; /* відступ унизу */
+}
+
+/* 5) Злегка відцентрувати текст на Home */
+.text-center {
+    text-align: center !important;
+}
+
+/* 6) Підсвічування активного пункту меню у Header */
+.navbar-nav .nav-link.active {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+}
+
+/* 7) Якщо потрібні дрібні стилі для таблиць Owners/Vets/Pets */
+.table-responsive {
+    margin-top: 20px;
+}
+
+.table thead th {
+    background-color: #343a40;
+    color: white;
+}
+
+/* 8) Інші дрібні налаштування (відступи, кольори, тощо) */
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+footer.footer {
+    padding: 10px 0;
+    background-color: #343a40;
+    color: #fff;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+/* Якщо є додаткові класи зі старого CSS, скопіюйте сюди */

@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/spring-petclinic-2.3.1.BUILD-SNAPSHOT/static/css/main.70869238.css",
+    "main.js": "/spring-petclinic-2.3.1.BUILD-SNAPSHOT/static/js/main.28596c6a.js",
+    "index.html": "/spring-petclinic-2.3.1.BUILD-SNAPSHOT/index.html",
+    "main.70869238.css.map": "/spring-petclinic-2.3.1.BUILD-SNAPSHOT/static/css/main.70869238.css.map",
+    "main.28596c6a.js.map": "/spring-petclinic-2.3.1.BUILD-SNAPSHOT/static/js/main.28596c6a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.70869238.css",
+    "static/js/main.28596c6a.js"
+  ]
+}

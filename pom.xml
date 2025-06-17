@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+                             https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <!-- 1. Coвпадають з тим, що задавали у Spring Initializr -->
+  <groupId>org.springframework.samples</groupId>
+  <artifactId>spring-petclinic</artifactId>
+  <version>2.3.1.BUILD-SNAPSHOT</version>
+  <packaging>war</packaging>
+
+  <!-- 2. Батьківський POM Spring Boot 2.7.18 (Java 17, WAR) -->
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.7.18</version>
+    <relativePath/> <!-- lookup parent from repository -->
+  </parent>
+
+  <properties>
+    <!-- Використовуємо Java 17 -->
+    <java.version>17</java.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencies>
+    <!-- A) Spring Web: створення REST API, вбудований Tomcat для локального запуску -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+
+    <!-- B) Spring Data JPA: Hibernate, EntityManager для JPA -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
+
+    <!-- C) MySQL Connector/J: додано явну версію, щоб Maven не скаржився -->
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>8.0.33</version>
+      <scope>runtime</scope>
+    </dependency>
+
+    <!-- D) Validation API: @NotNull, @NotEmpty тощо -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-validation</artifactId>
+    </dependency>
+
+    <!-- E) (Опційно) DevTools для гарячого перезапуску під час розробки -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-devtools</artifactId>
+      <scope>runtime</scope>
+      <optional>true</optional>
+    </dependency>
+
+    <!-- F) (Опційно) Actuator для метрик і моніторингу -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <!-- 1) Spring Boot Maven Plugin: виконує packaging у WAR, а також дозволяє запускати java -jar locally -->
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+
+      <!-- 2) Maven Resources Plugin: копіюємо production React build → target/classes/static -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>3.2.0</version>
+        <executions>
+          <execution>
+            <id>copy-react-build</id>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <!--
+                Папка для React build:
+                client/build → target/classes/static
+              -->
+              <outputDirectory>${project.build.outputDirectory}/static</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>${project.basedir}/client/build</directory>
+                  <includes>
+                    <include>**/*</include>
+                  </includes>
+                  <filtering>false</filtering>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- 3) Maven WAR Plugin: упаковуємо проєкт у WAR-файл -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>3.3.1</version>
+        <configuration>
+          <!--
+            Тут можна вказати додаткові налаштування, наприклад:
+            <failOnMissingWebXml>false</failOnMissingWebXml>
+            або
+            <warName>custom-name</warName>
+          -->
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <!-- (Не обов'язково) Якщо ви хочете публікувати SNAPSHOT-версії на OSSRH -->
+  <distributionManagement>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <name>OSSRH Snapshots</name>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+  </distributionManagement>
+</project>
